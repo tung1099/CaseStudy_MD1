@@ -1,12 +1,12 @@
-        let canvas = document.getElementById("game");
+        let canvas = document.getElementById("myCanvas");
         let context = canvas.getContext('2d');
         let score = 0;
         //Chỉ số quả bóng
         let radius = 10;
         let x = 10;
         let y = 10;
-        let dx = 5;
-        let dy = 3;
+        let ox = 5;
+        let oy = 2;
         //Chỉ số thanh chắn
         let bars = {
             x:0,
@@ -38,10 +38,26 @@
              alert("GAME OVER")
             }else if (x + radius >= bars.x && x + radius <= bars.x + bars.width
                        && y + radius >= 500 - bars.height){
-                dy = -dy
+                oy = -oy;
+                score += 1;
+
             }
+
         }
-        //Tính điểm người chơi
+        function userScore(){
+            if (score == 5){
+                ox = 7;
+                oy = 4;
+                alert("LV2")
+            }
+            if (score == 10){
+                ox = 10;
+                oy = 7;
+                alert("LV3")
+            }
+            if (score > 15)
+                alert("YOU WIN")
+        }
 
 
         //Thiết lập thời gian và tạo hiệu ứng di chuyển
@@ -50,42 +66,42 @@
         function draw() {
 
                 context.clearRect(0, 0, 500, 500);
+                userScore();
                 BallAndBars();
                 drawBall();
                 drawBars();
-                x += dx;
-                y += dy;
+                x += ox;
+                y += oy;
                 requestAnimationFrame(draw)
 
             //Xử lý bóng khi bóng va chạm đường biên
                 if (x < 10 || x > 490) {
-                        dx = -dx
+                        ox = -ox
                     }
                 if (y < 10) {
-                        dy = -dy
+                        oy = -oy
                     }
 
                 }
 
         draw()
         //Sự kiện bàn phím
-        window.addEventListener("keydown",function (event){
-            // console.log("keydown", event.keyCode)
-            if (event.keyCode == 37){
-                bars.x -= bars.speed;
-            } else if (event.keyCode == 39){
-                bars.x += bars.speed;
-            }
-            if (bars.x<0) {
-                bars.x = 0;
-            }
-            else if (bars.x>430) {
-                bars.x = 430;
-            }
+            window.addEventListener("keydown",function (event){
+                if (event.keyCode == 37){
+                    bars.x -= bars.speed;
+                } else if (event.keyCode == 39){
+                    bars.x += bars.speed;
+                }
+                if (bars.x<0) {
+                    bars.x = 0;
+                }
+                else if (bars.x>430) {
+                    bars.x = 430;
+                }
+
+            } )
 
 
-
-        } )
 
 
 
