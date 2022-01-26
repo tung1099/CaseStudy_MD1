@@ -48,14 +48,14 @@
             if (score == 5){
                 ox = 7;
                 oy = 4;
-                alert("LV2")
+                alert("Level 2")
             }
             if (score == 10){
                 ox = 10;
                 oy = 7;
-                alert("LV3")
+                alert("Level 3")
             }
-            if (score > 15)
+            if (score == 15)
                 alert("YOU WIN")
         }
 
